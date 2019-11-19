@@ -1,0 +1,2 @@
+module RestrictPageHelper
+end

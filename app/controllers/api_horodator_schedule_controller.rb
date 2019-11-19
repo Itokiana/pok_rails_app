@@ -20,7 +20,10 @@ class ApiHorodatorScheduleController < ActionController::API
       render json: owner
     end
 
+  end
 
+  def test_user
+    render json: current_user
   end
 
 end
