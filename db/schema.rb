@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_091437) do
+ActiveRecord::Schema.define(version: 2019_11_21_111817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_091437) do
   end
 
   create_table "horodator_schedules", force: :cascade do |t|
+    t.integer "end_status"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -45,6 +46,20 @@ ActiveRecord::Schema.define(version: 2019_11_19_091437) do
     t.string "email"
     t.string "password_digest"
     t.string "auth_tokens"
+  end
+
+  create_table "windows", force: :cascade do |t|
+    t.string "title"
+    t.string "platform"
+    t.integer "x"
+    t.integer "y"
+    t.integer "width_screen"
+    t.integer "height_screen"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.integer "total_focus"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

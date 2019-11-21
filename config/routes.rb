@@ -9,8 +9,8 @@ Rails.application.routes.draw do
 
   # resources :session, controller: 'sessions', only: [:create, :destroy]
 
-  post'/api/session', to: 'sessions#create'
-  delete'/api/session', to: 'sessions#destroy'
+  post '/api/session', to: 'sessions#create'
+  delete '/api/session/:id', to: 'sessions#destroy'
 
   post '/api/registration', to: 'registrations#create'
   put '/api/registration', to: 'registrations#update'
@@ -18,9 +18,11 @@ Rails.application.routes.draw do
 
   post '/inactivity', to: "api_inactivity#receive"
   post '/start_horodator', to: 'api_horodator_schedule#start_horodator'
+  put '/end_horodator', to: 'api_horodator_schedule#end_horodator'
 
   get '/current_user', to: 'api_horodator_schedule#test_user'
 
+  get '/test_date', to: 'window_activity#test_date'
 
   get '/manage_user', to: 'restrict_page#manage_user', as: 'manage_user'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
