@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url: MyString
+  date_of_visit: 2019-11-22 14:38:33
+  end_of_visit: 2019-11-22 14:38:33
+  focus: 1
+  start_focus: 2019-11-22 14:38:33
+  end_focus: 2019-11-22 14:38:33
+  total_focus: 1
+
+two:
+  url: MyString
+  date_of_visit: 2019-11-22 14:38:33
+  end_of_visit: 2019-11-22 14:38:33
+  focus: 1
+  start_focus: 2019-11-22 14:38:33
+  end_focus: 2019-11-22 14:38:33
+  total_focus: 1

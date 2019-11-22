@@ -58,8 +58,10 @@ ActiveRecord::Schema.define(version: 2019_11_21_111817) do
     t.datetime "started_at"
     t.datetime "ended_at"
     t.integer "total_focus"
+    t.bigint "horodator_schedule_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["horodator_schedule_id"], name: "index_windows_on_horodator_schedule_id"
   end
 
 end

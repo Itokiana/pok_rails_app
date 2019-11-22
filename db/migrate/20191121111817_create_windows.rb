@@ -10,6 +10,8 @@ class CreateWindows < ActiveRecord::Migration[6.0]
       t.datetime :started_at
       t.datetime :ended_at
       t.integer :total_focus
+      
+      t.belongs_to :horodator_schedule, index: true
 
       t.timestamps
     end
