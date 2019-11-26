@@ -12,6 +12,7 @@ class ApiHorodatorScheduleController < ActionController::API
 
     horodator_schedule = HorodatorSchedule.new
     horodator_schedule.user = current_user
+    horodator_schedule.end_status = 0
 
     if(horodator_schedule.save)
       owner = {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_21_111817) do
+ActiveRecord::Schema.define(version: 2019_11_22_113832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,20 @@ ActiveRecord::Schema.define(version: 2019_11_21_111817) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["horodator_schedule_id"], name: "index_inactivities_on_horodator_schedule_id"
+  end
+
+  create_table "url_visiteds", force: :cascade do |t|
+    t.string "url"
+    t.datetime "date_of_visit"
+    t.datetime "end_of_visit"
+    t.integer "focus"
+    t.datetime "start_focus"
+    t.datetime "end_focus"
+    t.integer "total_focus"
+    t.bigint "horodator_schedule_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["horodator_schedule_id"], name: "index_url_visiteds_on_horodator_schedule_id"
   end
 
   create_table "users", force: :cascade do |t|
