@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :accounts
   devise_for :admins
   resources :unlocks, controller: 'rails_jwt_auth/unlocks', only: %i[update]
   resources :invitations, controller: 'rails_jwt_auth/invitations', only: [:create, :update]
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
   put '/end_visit_url', to: 'visited_url#end_visit'
 
 
-  get '/manage_user', to: 'restrict_page#manage_user', as: 'manage_user'
+  get '/manage_users', to: 'user#index', as: 'manage_users'
+  get '/create_user', to: 'user#create', as: 'create_user'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -33,10 +33,11 @@ class VisitedUrlController < ActionController::API
     p "################################################"
     p url.start_focus.utc
     p  DateTime.now.utc
+    p total_focus(url.start_focus.utc, DateTime.now.utc )
     p "################################################"
     url.focus = 0
     url.end_focus = DateTime.now
-    url.total_focus = total_focus(url.start_focus.utc, DateTime.now.utc ) + url.total_focus
+    url.total_focus = total_focus(DateTime.parse(url.start_focus.utc.to_s), DateTime.parse(DateTime.now.utc.to_s) ) + url.total_focus
 
     if(url.save)
       render json: { success: 'Url updated' }

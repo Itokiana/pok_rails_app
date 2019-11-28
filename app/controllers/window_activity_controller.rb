@@ -29,7 +29,10 @@ class WindowActivityController < ActionController::API
   end
 
   def test_date
-    total = total_focus(DateTime.parse("2019-11-22T06:15:24.989Z"), DateTime.parse("2019-11-22T06:15:34.951Z"))
-    render json: { :date => total }
+    url = UrlVisited.last
+    # total = total_focus(url.start_focus.utc, (url.start_focus.utc + (60*60)) )
+    total = total_focus(DateTime.parse(url.start_focus.utc.to_s),  DateTime.parse((DateTime.now.utc).to_s) )
+    # total = total_focus(DateTime.parse("2019-11-22T06:15:24.989Z"), DateTime.parse("2019-11-22T06:15:34.951Z"))
+    render json: { :date => total, :type => DateTime.now.utc }
   end
 end
