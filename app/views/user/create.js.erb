@@ -1,1 +1,123 @@
-alert("COUCOU")
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+
+function addRow (id, email, password, alertBox, alertBoxSuccess) {
+  let userList = document.getElementById("user-list")
+  let tr = document.createElement('TR')
+  let td1 = document.createElement('TD')
+  let td2 = document.createElement('TD')
+  let td3 = document.createElement('TD')
+  let td4 = document.createElement('TD')
+
+  let a1 = document.createElement('A')
+  let a2 = document.createElement('A')
+  let a3 = document.createElement('A')
+
+  let spanI1 = document.createElement('SPAN')
+  let spanI2 = document.createElement('SPAN')
+  let spanI3 = document.createElement('SPAN')
+
+  let i1 = document.createElement('I')
+  let i2 = document.createElement('I')
+  let i3 = document.createElement('I')
+
+  let span1 = document.createElement('SPAN')
+  let span2 = document.createElement('SPAN')
+  let span3 = document.createElement('SPAN')
+
+  td1.innerHTML = id
+  td2.innerHTML = email
+  td3.innerHTML = password
+
+  a1.className = "btn btn-sm btn-info btn-icon-split mr-1"
+  a2.className = "btn btn-sm btn-primary btn-icon-split mr-1"
+  a3.className = "btn btn-sm btn-danger btn-icon-split mr-1"
+
+  spanI1.className = "icon text-white-50"
+  spanI2.className = "icon text-white-50"
+  spanI3.className = "icon text-white-50"
+
+  i1.className = "fas fa-flag"
+  i2.className = "fas fa-pen"
+  i3.className = "fas fa-trash"
+
+  span1.className = "text"
+  span2.className = "text"
+  span3.className = "text"
+
+  spanI1.append(i1)
+  spanI2.append(i2)
+  spanI3.append(i3)
+
+  span1.innerHTML = "Status"
+  span2.innerHTML = "Modifier"
+  span3.innerHTML = "Supprimer"
+
+  a1.append(spanI1)
+  a1.append(span1)
+  a1.setAttribute("href", "#")
+  
+  a2.append(spanI2)
+  a2.append(span2)
+  a2.setAttribute("href", "#")
+  
+  a3.append(spanI3)
+  a3.append(span3)
+  a3.setAttribute("href", "#")
+
+
+  td4.append(a1)
+  td4.append(a2)
+  td4.append(a3)
+
+  tr.append(td1)
+  tr.append(td2)
+  tr.append(td3)
+  tr.append(td4)
+
+  tr.className = "animated--grow-in"
+
+  userList.append(tr)
+  alertBox.style.display = "none"
+  alertBoxSuccess.style.display = "block"
+  setTimeout(() => alertBoxSuccess.style.display = "none" ,7000)
+}
+
+if(typeof emailNewUser === 'undefined'  &&  typeof passwordNewUser === 'undefined' )
+{
+  let emailNewUser = document.getElementById("email-new-user")
+  let passwordNewUser = document.getElementById("password-new-user")
+  let alertAddUser = document.getElementById("alert-add-user")
+  let alertAddUserSuccess = document.getElementById("alert-add-user-success")
+
+  // console.log( emailNewUser, passwordNewUser )
+
+  if( emailNewUser.value.length !== 0 && passwordNewUser.value.length !== 0 ){
+    if(validateEmail(emailNewUser.value)) {
+
+      $.ajax({
+        url: '<%= request.base_url %>/api/registration',
+        type: 'POST',
+        data: {
+          user: {
+            email: emailNewUser.value,
+            password: passwordNewUser.value
+          }
+        },
+        success: (res) => {
+          console.log(res)
+          addRow(res.user.id, res.user.email, res.user.password_digest, alertAddUser, alertAddUserSuccess)
+        },
+        error: () => {
+          // 
+        }
+      })
+    } else {
+      alertAddUser.style.display = "block"
+      setTimeout(() => alertAddUser.style.display = "none" ,15000)
+    }
+    
+  }
+}

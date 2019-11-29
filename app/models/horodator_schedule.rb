@@ -2,5 +2,5 @@ class HorodatorSchedule < ApplicationRecord
   belongs_to :user
   has_many :inactivities
   has_many :windows
-  has_many :url_visited
+  has_many :url_visiteds
 end

@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   devise_for :accounts
+
   devise_for :admins
+  # devise_for :admins
+  # devise_scope :admin do
+  #   post    '/admins/sign_up'   => 'devise/registrations#create',     as: :admin_registration
+  # end
+
   resources :unlocks, controller: 'rails_jwt_auth/unlocks', only: %i[update]
   resources :invitations, controller: 'rails_jwt_auth/invitations', only: [:create, :update]
   resources :passwords, controller: 'rails_jwt_auth/passwords', only: [:create, :update]
@@ -35,5 +41,6 @@ Rails.application.routes.draw do
 
   get '/manage_users', to: 'user#index', as: 'manage_users'
   get '/create_user', to: 'user#create', as: 'create_user'
+  delete '/destroy_user/:id', to: 'user#destroy', as: 'destroy_user'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
