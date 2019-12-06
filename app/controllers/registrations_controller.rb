@@ -10,6 +10,8 @@ class RegistrationsController < RailsJwtAuth::RegistrationsController
   end
 
   def destroy
-    super
+    user = RailsJwtAuth.model.find(params[:id])
+    user.delete
+    render json: { success: "Removed"}
   end
 end

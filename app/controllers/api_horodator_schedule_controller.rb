@@ -5,9 +5,12 @@ class ApiHorodatorScheduleController < ActionController::API
 
   def start_horodator
 
-    last_schedule = HorodatorSchedule.where(user: current_user, end_status: nil)
+    last_schedule = HorodatorSchedule.where(user: current_user, end_status: 0)
     if(last_schedule.length != 0)
-      last_schedule[0].end_status = 1
+      last_schedule.each do |ls|
+        ls.end_status = 1
+        ls.save
+      end
     end 
 
     horodator_schedule = HorodatorSchedule.new
@@ -28,6 +31,14 @@ class ApiHorodatorScheduleController < ActionController::API
 
   def end_horodator
 
+    last_schedule = HorodatorSchedule.where(user: current_user, end_status: 0)
+    if(last_schedule.length != 0)
+      last_schedule.each do |ls|
+        ls.end_status = 1
+        ls.save
+      end
+    end 
+    
     horodator_schedule = HorodatorSchedule.find(params[:schedule])
     horodator_schedule.end_status = 1
 

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   post '/api/registration', to: 'registrations#create'
   put '/api/registration', to: 'registrations#update'
-  delete '/api/registration', to: 'registrations#destroy'
+  delete '/api/registration/:id', to: 'registrations#destroy'
 
   post '/inactivity', to: "api_inactivity#receive"
   post '/start_horodator', to: 'api_horodator_schedule#start_horodator'
@@ -39,8 +39,15 @@ Rails.application.routes.draw do
   put '/end_visit_url', to: 'visited_url#end_visit'
 
 
-  get '/manage_users', to: 'user#index', as: 'manage_users'
-  get '/create_user', to: 'user#create', as: 'create_user'
-  delete '/destroy_user/:id', to: 'user#destroy', as: 'destroy_user'
+  get '/admin/dashboard', to: 'user#index', as: 'dashboard_admin'
+  get '/admin/manage_users', to: 'user#manage_users', as: 'manage_users'
+  get '/admin/create_user', to: 'user#create', as: 'create_user'
+  delete '/admin/destroy_user/:id', to: 'user#destroy', as: 'destroy_user'
+
+
+  get '/user_state/:id', to: 'user_state#index', as: 'user_state'
+  get '/user_state/:id/windows', to: 'user_state#all_windows_activities'
+  get '/user_state/:id/inactivities', to: 'user_state#all_inactivities'
+  get '/user_state/:id/urls_visited', to: 'user_state#all_url_visited'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

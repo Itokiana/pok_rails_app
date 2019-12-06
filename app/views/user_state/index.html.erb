@@ -1,0 +1,132 @@
+<%= render 'shared/link' %>
+
+<div id="page-top">
+
+  <div id="wrapper">
+
+    <%= render 'shared/side_navigation' %>
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+        <%= render 'shared/navbar' %>
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <div class="d-sm-flex align-items-center justify-content-between mb-4" data-turbolinks="false">
+            <h1 class="h3 mb-4 text-gray-800">A propos de <%= @user.email %></h1>
+            <a href="#" id="refresh-data" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+              <i class="fas fa-spinner fa-sm text-white-50"></i> 
+              Rafraîchir
+            </a>
+          </div>
+
+          <div class="d-sm-flex align-items-center justify-content-between mb-4" data-turbolinks="false">
+            <div class="form-group row col-4">
+              <label class="col-2 mt-1">Horaire :</label>
+              <div class="col-6">
+                <select class="custom-select form-control" id="horodator_user">
+                  <% @user.horodator_schedules.each do |hs| %>
+                  <option value="<%= hs.id %>" ><%= hs.created_at%></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <input type="hidden" id="base_url" value="<%= request.base_url %>" />
+
+          <nav data-turbolinks="false">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Statut</a>
+              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+              <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="bg-light pt-4 tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+              
+              <div class="row">
+                <div class="col-12">
+
+                  <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                      <h6 class="m-0 font-weight-bold text-primary">Fenêtre(s) récente(s)</h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseCardExample" style="">
+                      <div class="card-body">
+                        
+                        <table class="table table-bordered" id="windows" width="100%"></table>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+
+                  <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardExample2" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample2">
+                      <h6 class="m-0 font-weight-bold text-primary">URL(s) visité(s)</h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseCardExample2" style="">
+                      <div class="card-body">
+                        
+                        <table class="table table-bordered" id="urls" width="100%"></table>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+
+                  <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardExample3" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample3">
+                      <h6 class="m-0 font-weight-bold text-primary">Temps d'inactivité</h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseCardExample3" style="">
+                      <div class="card-body">
+                        
+                        <table class="table table-bordered" id="inactivities" width="100%"></table>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+            <div class="bg-light tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">2</div>
+            <div class="bg-light tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
+          </div>
+
+
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+
+      <%= render 'shared/footer' %>
+    </div>
+
+
+  </div>
+</div>
+
+<%= render 'shared/javascript' %>
+<%= javascript_pack_tag 'user_state' %>
