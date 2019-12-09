@@ -18,6 +18,13 @@ class ApiHorodatorScheduleController < ActionController::API
     horodator_schedule.end_status = 0
 
     if(horodator_schedule.save)
+
+      user = current_user
+      user.ip = params[:ip]
+      user.mac = params[:mac]
+      user.start = DateTime.now
+      user.save
+      
       owner = {
         :type => 'Success',
         :start => horodator_schedule.created_at,

@@ -43,6 +43,10 @@ Rails.application.routes.draw do
   get '/admin/manage_users', to: 'user#manage_users', as: 'manage_users'
   get '/admin/create_user', to: 'user#create', as: 'create_user'
   delete '/admin/destroy_user/:id', to: 'user#destroy', as: 'destroy_user'
+  get '/api/admin/total_schedule', to: 'user#total_schedule'
+  get '/api/admin/top_apps', to: 'user#top_five_app'
+  get '/api/admin/top_urls', to: 'user#top_five_url'
+  get '/api/admin/user_active', to: 'user#user_active'
 
 
   get '/user_state/:id', to: 'user_state#index', as: 'user_state'

@@ -5,6 +5,13 @@ class ApiInactivityController < ActionController::API
   before_action :authenticate!
 
   def receive
+
+    last_inactivity = Inactivity.where([ "since = ?", DateTime.parse(params[:inactivity][:created_at]) ])
+    if(last_inactivity)
+      last_inactivity.each do |i|
+        i.delete
+      end
+    end
     
     mouse_position = Inactivity.new
     mouse_position.horodator_schedule = HorodatorSchedule.find(params[:schedule].to_i)
