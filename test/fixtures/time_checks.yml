@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  application: 1
+  inactivity: 1
+  inactivity_part: 
+
+two:
+  application: 1
+  inactivity: 1
+  inactivity_part: 

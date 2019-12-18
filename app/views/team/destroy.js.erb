@@ -1,0 +1,15 @@
+function destroy() {
+  $("#team<%= @id %>").remove()
+  
+  if($("#team").children().length === 0){
+    $('#team').append(`
+    
+      <tr id="team_empty">
+        <td colspan="3" class="text-center">Aucun team</td>
+      </tr>
+
+    `)
+  }
+}
+
+destroy()

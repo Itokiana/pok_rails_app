@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -13,17 +13,24 @@
   <hr class="sidebar-divider my-0">
 
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item">
+  <li class="nav-item <% if current_page?(controller: 'user', action: 'index')%>active<%end%>">
   <%=link_to dashboard_admin_path, class: "nav-link" do %>
     <i class="fas fa-fw fa-tachometer-alt"></i>
     <span>Dashboard</span>
   <% end %>
   </li>
 
-  <li class="nav-item">
+  <li class="nav-item <% if current_page?(controller: 'user', action: 'manage_users')%>active<%end%>">
   <%=link_to manage_users_path, class: "nav-link" do %>
     <i class="fas fa-fw fa-users-cog"></i>
     <span>Gestion utilisateurs</span>
+  <% end %>
+  </li>
+
+  <li class="nav-item <% if current_page?(controller: 'settings', action: 'index')%>active<%end%>">
+  <%=link_to settings_path, class: "nav-link" do %>
+    <i class="fas fa-fw fa-cogs"></i>
+    <span>Paramètres</span>
   <% end %>
   </li>
 

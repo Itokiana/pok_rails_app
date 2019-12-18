@@ -11,6 +11,25 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div id="loading" class="animated--fade-in bg-gradient-primary">
+      <div id="loading-center">
+        <div id="loading-center-absolute">
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+        </div>
+      </div>
+    
+    </div>
+    <div id="all" style="display: none">
+      <%= yield %>
+    </div>
   </body>
 </html>

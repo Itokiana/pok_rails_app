@@ -1,0 +1,134 @@
+<%= render 'shared/link' %>
+
+<div id="page-top">
+
+  <div id="wrapper">
+
+    <%= render 'shared/side_navigation' %>
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <input type="hidden" id="base_url" value="<%= request.base_url %>" />
+
+      <!-- Main Content -->
+      <div id="content">
+        <%= render 'shared/navbar' %>
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-4 text-gray-800">Paramètres</h1>
+          </div>
+
+          <div class="row">
+
+            <div class="col-lg-6">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-info">Gestion Team</h6>
+                </div>
+                <div class="card-body">
+                  <%= form_for @team, url: create_team_path, method: :post, remote: true do |f| %>
+                  <div class="input-group mb-5">
+                    <%= f.text_field :name, class: "form-control", placeholder: "Nom de la team..." %>
+                    <div class="input-group-append" id="button-addon4">
+                      <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-plus"></i>
+                        Ajouter
+                      </button>
+                    </div>
+                  </div>
+                  <% end %>
+
+                  <table class="table table-sm">
+                    <thead class="bg-info text-light">
+                      <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody id="team">
+                      <% if @teams.length != 0 %>
+                        <% @teams.each do |t| %>
+                          <tr id="team<%= t.id %>">
+                            <td><%= t.name %></td>
+                            <td class="text-center">
+                              <%= link_to delete_team_path(t.id), class:"btn btn-danger btn-circle", method: :delete, data: {confirm: "Êtes-vous sûre de vouloir supprimer?"}, remote: true do %>
+                                <i class="fas fa-trash"></i>
+                              <% end %>
+                            </td>
+                          </tr>
+                        <% end %>
+                      <% else %>
+                        <tr id="team_empty">
+                          <td colspan="3" class="text-center">Aucun team</td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-info">Time check</h6>
+                </div>
+                <div class="card-body">
+
+                  <%= form_for @time_check, url: create_time_check_path, method: :post, remote: true do |f| %>
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Inactivité</span>
+                    </div>
+                    <%= f.number_field :inactivity, class: "form-control" %>
+                    <div class="input-group-append">
+                      <span class="input-group-text" id="inputGroup-sizing-default">seconde(s)</span>
+                      <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-save"></i>
+                        Enregistrer
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Sous-inactivité</span>
+                    </div>
+                    <%= f.number_field :inactivity_part, class: "form-control" %>
+                    <div class="input-group-append">
+                      <span class="input-group-text" id="inputGroup-sizing-default">seconde(s)</span>
+                      <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-save"></i>
+                        Enregistrer
+                      </button>
+                    </div>
+                  </div>
+
+                  <% end %>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+
+      <%= render 'shared/footer' %>
+    </div>
+
+
+  </div>
+</div>
+
+
+<%= render 'shared/javascript' %>

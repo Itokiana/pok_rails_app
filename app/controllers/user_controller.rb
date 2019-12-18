@@ -7,6 +7,10 @@ class UserController < ApplicationController
 
   def manage_users
     @users = User.all
+    respond_to do |f|
+      f.html
+      f.js
+    end
   end
 
   def total_schedule
@@ -19,7 +23,7 @@ class UserController < ApplicationController
       total_inactivity += ai.total
     end
 
-    render json: { first_schedule: first_schedule[0].created_at, total_inactivity: total_inactivity }
+    render json: { first_schedule: first_schedule[0] ? first_schedule[0].created_at : "0", total_inactivity: total_inactivity }
   end
 
   def top_five_url
@@ -50,10 +54,20 @@ class UserController < ApplicationController
   def user_active
     schedules = HorodatorSchedule.where(end_status: 0)
     active_user = []
-    schedules.each do |s|
-      user_schedules = HorodatorSchedule.where([ "created_at::date = ? AND user_id = ?", Date.today, s.user.id ])
-      active_user << { email: s.user.email, ip: s.user.ip, mac: s.user.mac, start: s.user.start }
+    if(schedules.length != 0)
+      schedules.each do |s|
+        user_schedules = HorodatorSchedule.where([ "created_at::date = ? AND user_id = ?", Date.today, s.user.id ])
+        active_user << { 
+          user_id: s.user.id, 
+          email: s.user.email, 
+          ip: s.user.ip, 
+          mac: s.user.mac, 
+          start: s.user.start, 
+          top_inactivity: top_inactivity(s.user.id) 
+        }
+      end
     end
+    
     render json: active_user
   end
 

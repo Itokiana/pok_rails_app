@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_09_153502) do
+ActiveRecord::Schema.define(version: 2019_12_11_085848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,20 @@ ActiveRecord::Schema.define(version: 2019_12_09_153502) do
     t.index ["horodator_schedule_id"], name: "index_inactivities_on_horodator_schedule_id"
   end
 
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "time_checks", force: :cascade do |t|
+    t.integer "application"
+    t.integer "inactivity"
+    t.integer "inactivity_part"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "url_visiteds", force: :cascade do |t|
     t.string "url"
     t.datetime "date_of_visit"
@@ -79,6 +93,10 @@ ActiveRecord::Schema.define(version: 2019_12_09_153502) do
     t.string "ip"
     t.string "mac"
     t.datetime "start"
+    t.bigint "team_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.index ["team_id"], name: "index_users_on_team_id"
   end
 
   create_table "windows", force: :cascade do |t|
@@ -97,4 +115,5 @@ ActiveRecord::Schema.define(version: 2019_12_09_153502) do
     t.index ["horodator_schedule_id"], name: "index_windows_on_horodator_schedule_id"
   end
 
+  add_foreign_key "users", "teams"
 end

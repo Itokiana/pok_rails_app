@@ -39,7 +39,7 @@
           <input type="hidden" id="base_url" value="<%= request.base_url %>" />
 
           <nav data-turbolinks="false">
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <div class="nav nav-tabs" id="user-nav-tab" role="tablist">
               <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Statut</a>
               <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
               <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
@@ -58,8 +58,8 @@
                     </a>
                     <!-- Card Content - Collapse -->
                     <div class="collapse show" id="collapseCardExample" style="">
-                      <div class="card-body">
-                        
+                      <div class="card-body" id="windows_card">
+
                         <table class="table table-bordered" id="windows" width="100%"></table>
 
                       </div>
@@ -79,7 +79,7 @@
                     </a>
                     <!-- Card Content - Collapse -->
                     <div class="collapse show" id="collapseCardExample2" style="">
-                      <div class="card-body">
+                      <div class="card-body" id="urls_card">
                         
                         <table class="table table-bordered" id="urls" width="100%"></table>
 
@@ -100,7 +100,7 @@
                     </a>
                     <!-- Card Content - Collapse -->
                     <div class="collapse show" id="collapseCardExample3" style="">
-                      <div class="card-body">
+                      <div class="card-body" id="inactivities_card">
                         
                         <table class="table table-bordered" id="inactivities" width="100%"></table>
 
@@ -112,7 +112,54 @@
               </div>
 
             </div>
-            <div class="bg-light tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">2</div>
+
+            <div class="bg-light tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            
+              <div class="row">
+                <div class="col-6">
+                
+                  <div class="card shadow mb-4 mt-4">
+                    <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary"><%= @user.email %></h6>
+                    </div>
+                    <div class="card-body">
+
+                      <%= form_for @user, url: create_user_details_path(@user.id), method: :post, remote: true do |f| %>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroup-sizing-default">
+                            <i class="fas fa-user"></i>
+                            &nbsp;Nom et prénom(s)
+                          </span>
+                        </div>
+                        <%= f.text_field :first_name, class: "form-control", placeholder: "Nom" %>
+                        <%= f.text_field :last_name, class: "form-control", placeholder: "Prénom(s)" %>
+                        <div class="input-group-append">
+                          <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-save"></i>
+                            Enregistrer
+                          </button>
+                        </div>
+                      </div>
+
+                      <% end %>
+
+                      <%= form_for @user, url: add_user_team_path(@user.id), method: :post, remote: true do |f| %>
+                      <div class="input-group">
+                        <%= f.select(:team, Team.all.collect { |t| [t.name, t.id] }, { include_blank: @user.team != nil ?  @user.team.name : '--Team--' }, {class: "custom-select"} ) %>
+                        <div class="input-group-append">
+                          <button class="btn btn-secondary" type="submit">Ajouter</button>
+                        </div>
+                      </div>
+                      <% end %>
+                      
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
             <div class="bg-light tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
           </div>
 

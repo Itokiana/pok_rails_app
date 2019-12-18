@@ -42,7 +42,6 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>#</th>
                       <th>Email</th>
                       <th>Mot de passe</th>
                       <th></th>
@@ -50,7 +49,6 @@
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>#</th>
                       <th>Email</th>
                       <th>Mot de passe</th>
                       <th></th>
@@ -59,7 +57,6 @@
                   <tbody id="user-list">
                     <% @users.each do |u| %>
                       <tr class="animated--fade-in">
-                        <td><%= u.id %></td>
                         <td><%= u.email %></td>
                         <td><%= u.password_digest %></td>
                         <td>
@@ -69,12 +66,12 @@
                             </span>
                             <span class="text">Status</span>
                           <% end %>
-                          <a href="#" class="btn btn-sm btn-primary btn-icon-split">
+                          <%= link_to user_profil_path(u.id), class: "btn-profil btn btn-sm btn-primary btn-icon-split" do %>
                             <span class="icon text-white-50">
                               <i class="fas fa-pen"></i>
                             </span>
                             <span class="text">Modifier</span>
-                          </a>
+                          <% end %>
                           <%= link_to destroy_user_path(u.id), class: "btn btn-sm btn-danger btn-icon-split", method: :delete, data: { confirm: "Êtes-vous sûre de vouloir supprimer ?" } do %>
                             <span class="icon text-white-50">
                               <i class="fas fa-trash"></i>
@@ -156,3 +153,4 @@
 
 <%= render 'shared/javascript' %>
 <%= render 'shared/datatable_source_script' %>
+<%= javascript_pack_tag 'profil' %>

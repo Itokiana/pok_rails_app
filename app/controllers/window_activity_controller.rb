@@ -8,21 +8,46 @@ class WindowActivityController < ActionController::API
     schedule = HorodatorSchedule.where(user: current_user, end_status: 0)[0]
 
     if(schedule != nil)
-      window = Window.new
-      window.title = params[:title]
-      window.platform = params[:platform]
-      window.x = params[:x]
-      window.y = params[:y]
-      window.width_screen = params[:widthScreen]
-      window.height_screen = params[:heightScreen]
-      window.started_at = DateTime.parse(params[:startedAt]).strftime("%Y-%m-%d %H:%M:%S")
-      window.ended_at = DateTime.parse(params[:endedAt]).strftime("%Y-%m-%d %H:%M:%S")
-      window.total_focus = total_focus(DateTime.parse(params[:startedAt]), DateTime.parse(params[:endedAt]))
-      window.horodator_schedule = schedule
-      
-      if(window.save)
-        render json: { :success => "ok" }
+      schedule.windows.each do |w|
+        if(w != nil)
+          w.total_focus += 0
+          w.save
+        end
       end
+      last_window = Window.where(title: params[:title], horodator_schedule: schedule).order("created_at DESC").limit(1)
+      if(last_window.length != 0)
+        ltf = last_window[0].total_focus
+        last_window[0].ended_at = DateTime.parse(DateTime.now.utc.to_s)
+        p "#####################################################"
+        p "STart => " + last_window[0].total_focus.to_s
+        p ltf
+        last_window[0].total_focus = total_focus(DateTime.parse(last_window[0].updated_at.utc.to_s), DateTime.parse(DateTime.now.utc.to_s) )
+        p last_window[0].total_focus
+        last_window[0].total_focus += ltf
+        p last_window[0].total_focus
+        p "#####################################################"
+        
+        if(last_window[0].save)
+          render json: { :success => "ok" }
+        end
+      else
+        window = Window.new
+        window.title = params[:title]
+        window.platform = params[:platform]
+        window.x = params[:x]
+        window.y = params[:y]
+        window.width_screen = params[:widthScreen]
+        window.height_screen = params[:heightScreen]
+        window.started_at = DateTime.parse(params[:startedAt])
+        window.ended_at = DateTime.parse(params[:endedAt]).strftime("%Y-%m-%d %H:%M:%S")
+        window.total_focus = total_focus(DateTime.parse(params[:startedAt]), DateTime.now)
+        window.horodator_schedule = schedule
+        
+        if(window.save)
+          render json: { :success => "ok" }
+        end
+      end
+
     end
 
     
