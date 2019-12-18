@@ -264,7 +264,7 @@ $('#horodator_user').change((e) => {
 })
 
 
-if(typeof sessionStorage.getItem("profil") !== 'undefined'){
+if(sessionStorage.getItem("profil") !== null){
   $('#user-nav-tab a[href="#nav-profile"]').tab('show')
   sessionStorage.removeItem("profil")
 }
