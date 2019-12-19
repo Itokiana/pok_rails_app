@@ -31,6 +31,10 @@ class TeamController < ApplicationController
     team = Team.find(params[:id])
     @id = params[:id]
     if(team)
+      team.users.each do |u|
+        u.team = nil
+        u.save
+      end
       team.delete
       respond_to do |f|
         f.html { redirect_to settings_path }

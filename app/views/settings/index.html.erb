@@ -103,10 +103,6 @@
                     <%= f.number_field :inactivity_part, class: "form-control" %>
                     <div class="input-group-append">
                       <span class="input-group-text" id="inputGroup-sizing-default">seconde(s)</span>
-                      <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-save"></i>
-                        Enregistrer
-                      </button>
                     </div>
                   </div>
 
@@ -132,3 +128,4 @@
 
 
 <%= render 'shared/javascript' %>
+<%= javascript_pack_tag 'settings' %>

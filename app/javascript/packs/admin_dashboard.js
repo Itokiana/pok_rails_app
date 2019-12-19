@@ -26,6 +26,24 @@ function dateDiffInSecond(date1, date2) {
   return diff.sec + (diff.min * 60) + (diff.hour * 3600) + (diff.day * 86400);
 }
 
+function minsec(second) {
+  let hours = Math.floor(second / 3600);
+  let minutes = Math.floor(second / 60);
+  let seconds = second - minutes * 60;
+
+  if(hours !== 0){
+    return hours + "h" + minutes + "m" + seconds + "s";
+  } else if(minutes !== 0) {
+    return minutes + "m" + seconds + "s";
+  } else {
+    return seconds + "s";
+  }
+}
+
+function dateFormat(d){
+  let date = ("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth() + 1)).slice(-2)+"/"+d.getFullYear()+" à "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2);
+  return date
+}
 
 function schedule_states(){
   $.ajax({
@@ -120,8 +138,8 @@ function user_active() {
             <td>${u.email}</td>
             <td>${u.ip}</td>
             <td>${u.mac}</td>
-            <td>${u.start}</td>
-            <td>${u.top_inactivity.total} sec(s)</td>
+            <td>${ dateFormat(new Date(u.start)) }</td>
+            <td>${u.top_inactivity !== null ? minsec(u.top_inactivity.total) : 0}</td>
             <td>
               <a href="${base_url}/user_state/${ u.user_id }" class="btn btn-sm btn-info btn-icon-split">
                 <span class="icon text-white-50">

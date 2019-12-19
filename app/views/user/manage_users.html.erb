@@ -43,14 +43,16 @@
                   <thead>
                     <tr>
                       <th>Email</th>
-                      <th>Mot de passe</th>
+                      <th>Nom et prénom(s)</th>
+                      <th>Team</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th>Email</th>
-                      <th>Mot de passe</th>
+                      <th>Nom et prénom(s)</th>
+                      <th>Team</th>
                       <th></th>
                     </tr>
                   </tfoot>
@@ -58,7 +60,8 @@
                     <% @users.each do |u| %>
                       <tr class="animated--fade-in">
                         <td><%= u.email %></td>
-                        <td><%= u.password_digest %></td>
+                        <td><%= u.first_name %> <%= u.last_name %></td>
+                        <td><%= u.team != nil ? u.team.name : "--" %></td>
                         <td>
                           <%= link_to user_state_path(u.id), class: "btn btn-sm btn-info btn-icon-split" do %>
                             <span class="icon text-white-50">
