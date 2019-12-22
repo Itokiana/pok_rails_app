@@ -7,7 +7,9 @@ gem 'rails_jwt_auth'
 gem 'rack-cors'
 gem 'devise'
 gem 'table_print'
-gem 'devise'
+
+gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'
+gem 'cancancan'
 
 gem 'pg'
 

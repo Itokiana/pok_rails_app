@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   get 'settings/index'
-  devise_for :accounts
 
-  devise_for :admins
+  devise_for :admins, controllers: {
+      sessions: 'admins/sessions',
+      passwords: 'admins/passwords',
+      registrations: 'admins/registrations'
+  }
+
+  # devise_for :admins
   # devise_for :admins
   # devise_scope :admin do
   #   post    '/admins/sign_up'   => 'devise/registrations#create',     as: :admin_registration
@@ -41,10 +46,10 @@ Rails.application.routes.draw do
   put '/end_visit_url', to: 'visited_url#end_visit'
 
 
-  get '/admin/dashboard', to: 'user#index', as: 'dashboard_admin'
-  get '/admin/manage_users', to: 'user#manage_users', as: 'manage_users'
-  get '/admin/create_user', to: 'user#create', as: 'create_user'
-  delete '/admin/destroy_user/:id', to: 'user#destroy', as: 'destroy_user'
+  get '/dashboard/dashboard', to: 'user#index', as: 'dashboard_admin'
+  get '/dashboard/manage_users', to: 'user#manage_users', as: 'manage_users'
+  get '/dashboard/create_user', to: 'user#create', as: 'create_user'
+  delete '/dashboard/destroy_user/:id', to: 'user#destroy', as: 'destroy_user'
   get '/api/admin/total_schedule', to: 'user#total_schedule'
   get '/api/admin/top_apps', to: 'user#top_five_app'
   get '/api/admin/top_urls', to: 'user#top_five_url'

@@ -1,6 +1,7 @@
 class UserController < ApplicationController
   include UserHelper
-  before_action :authenticate_admin!, only: [:index, :manage_users, :create, :destroy]
+  # before_action :authenticate_admin!, only: [:index, :manage_users, :create, :destroy]
+  skip_before_action :authenticate_admin!, only: [:index, :manage_users, :create, :destroy]
 
   def index
   end
