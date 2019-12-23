@@ -78,7 +78,7 @@ Rails.application.routes.draw do
   put "/time_check/:id/update", to: "time_check#update"
   delete "/time_check/:id", to: "time_check#destroy"
 
-  get "/admin/settings", to: 'settings#index', as: 'settings'
-  get "/admin/settings/time_check", to: 'settings#timecheck'
+  get "/dashboard/settings", to: 'settings#index', as: 'settings'
+  get "/dashboard/settings/time_check", to: 'settings#timecheck'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
