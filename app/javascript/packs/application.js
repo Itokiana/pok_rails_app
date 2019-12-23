@@ -8,6 +8,9 @@ require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
 
+import "../stylesheets/application"
+global.toastr = require("toastr")
+
 require('jquery')
 
 

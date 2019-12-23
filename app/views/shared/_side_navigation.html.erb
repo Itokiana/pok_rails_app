@@ -37,6 +37,16 @@
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
 
+  <% if current_admin.superadmin_role? %>
+  <li class="nav-item">
+  <%=link_to request.base_url + '/admin', class: "nav-link" do %>
+    <i class="fas fa-fw fa-cogs"></i>
+    <span>Super Admin</span>
+  <% end %>
+  </li>
+  <% end %>
+
+
   <!-- Sidebar Toggler (Sidebar) -->
   <div class="text-center d-none d-md-inline">
     <button class="rounded-circle border-0" id="sidebarToggle"></button>

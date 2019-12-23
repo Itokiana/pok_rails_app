@@ -30,6 +30,6 @@ test:
 production:
   <<: *default
   # database: db/production.sqlite3
-  database: physalis_app_production
-  username: physalis_app
-  password: <%= ENV['PHYSALIS_APP_DATABASE_PASSWORD'] %>
+  database: physalis_app
+  username: physalis
+  password: pok-pok-101 #<%= ENV['PHYSALIS_APP_DATABASE_PASSWORD'] %>

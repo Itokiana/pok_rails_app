@@ -11,6 +11,13 @@ gem 'table_print'
 gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'
 gem 'cancancan'
 
+# FOR PRODUCTION ############################################
+gem 'capistrano', '~> 3.11'
+gem 'capistrano-rails', '~> 1.4'
+gem 'capistrano-passenger', '~> 0.2.0'
+gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+##############################################################
+
 gem 'pg'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
