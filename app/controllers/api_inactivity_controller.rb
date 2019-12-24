@@ -1,8 +1,8 @@
 class ApiInactivityController < ActionController::API
 
-  include RailsJwtAuth::AuthenticableHelper
+  include ApiApplicationHelper
+  before_action :require_login
   include WindowActivityHelper
-  before_action :authenticate!
 
   def receive
 

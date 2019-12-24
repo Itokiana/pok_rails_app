@@ -1,8 +1,8 @@
 class VisitedUrlController < ActionController::API
   
-  include RailsJwtAuth::AuthenticableHelper
   include WindowActivityHelper
-  before_action :authenticate!
+  include ApiApplicationHelper
+  before_action :require_login
 
   def last_url
     url = UrlVisited.find_by url: params[:url], end_of_visit: nil

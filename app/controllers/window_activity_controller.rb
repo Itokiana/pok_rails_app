@@ -1,8 +1,8 @@
 class WindowActivityController < ActionController::API
 
-  include RailsJwtAuth::AuthenticableHelper
   include WindowActivityHelper
-  before_action :authenticate!
+  include ApiApplicationHelper
+  before_action :require_login
 
   def receive
     schedule = HorodatorSchedule.where(user: current_user, end_status: 0)[0]

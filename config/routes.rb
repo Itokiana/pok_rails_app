@@ -9,20 +9,11 @@ Rails.application.routes.draw do
       registrations: 'admins/registrations'
   }
 
-  # devise_for :admins
-  # devise_for :admins
-  # devise_scope :admin do
-  #   post    '/admins/sign_up'   => 'devise/registrations#create',     as: :admin_registration
-  # end
+  resource :users, only: [:create]   
 
-  resources :unlocks, controller: 'rails_jwt_auth/unlocks', only: %i[update]
-  resources :invitations, controller: 'rails_jwt_auth/invitations', only: [:create, :update]
-  # resources :passwords, controller: 'rails_jwt_auth/passwords', only: [:create, :update]
-  resources :confirmations, controller: 'rails_jwt_auth/confirmations', only: [:create, :update]
-  # resources :registration, controller: 'rails_jwt_auth/registrations', only: [:create, :update, :destroy]
-  # resources :session, controller: 'rails_jwt_auth/sessions', only: [:create, :destroy]
-
-  # resources :session, controller: 'sessions', only: [:create, :destroy]
+  post "api/login", action: :login, controller: 'api/auth'   
+  get "api/auto_login", action: :auto_login, controller: 'api/auth' 
+  get "api/user_is_authed", action: :user_is_authed, controller: 'api/auth' 
 
   put '/api/passwords/:id', to: "passwords#update"
   post '/api/session', to: 'sessions#create'

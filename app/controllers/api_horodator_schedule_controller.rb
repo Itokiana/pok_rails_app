@@ -1,7 +1,7 @@
 class ApiHorodatorScheduleController < ActionController::API
 
-  include RailsJwtAuth::AuthenticableHelper
-  before_action :authenticate!
+  include ApiApplicationHelper
+  before_action :require_login
 
   def start_horodator
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_23_094917) do
+ActiveRecord::Schema.define(version: 2019_12_24_082945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,16 +90,11 @@ ActiveRecord::Schema.define(version: 2019_12_23_094917) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.string "auth_tokens"
-    t.string "ip"
-    t.string "mac"
-    t.datetime "start"
-    t.bigint "team_id"
-    t.string "first_name"
-    t.string "last_name"
-    t.index ["team_id"], name: "index_users_on_team_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "windows", force: :cascade do |t|
@@ -118,5 +113,4 @@ ActiveRecord::Schema.define(version: 2019_12_23_094917) do
     t.index ["horodator_schedule_id"], name: "index_windows_on_horodator_schedule_id"
   end
 
-  add_foreign_key "users", "teams"
 end
