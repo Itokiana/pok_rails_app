@@ -27,12 +27,14 @@
   <% end %>
   </li>
 
+  <% if current_admin.superadmin_role? %>
   <li class="nav-item <% if current_page?(controller: 'settings', action: 'index')%>active<%end%>">
   <%=link_to settings_path, class: "nav-link" do %>
     <i class="fas fa-fw fa-cogs"></i>
     <span>Paramètres</span>
   <% end %>
   </li>
+  <% end %>
 
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
@@ -40,7 +42,7 @@
   <% if current_admin.superadmin_role? %>
   <li class="nav-item">
   <%=link_to request.base_url + '/admin', class: "nav-link" do %>
-    <i class="fas fa-fw fa-cogs"></i>
+    <i class="fas fa-fw fa-crown"></i>
     <span>Super Admin</span>
   <% end %>
   </li>

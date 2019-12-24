@@ -26,10 +26,12 @@
 
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-4 text-gray-800">Gestion des utilisateurs</h1>
+            <% if current_admin.superadmin_role? %>
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#addUser">
               <i class="fas fa-user-plus fa-sm text-white-50"></i> 
               Nouveau utilisateur
             </a>
+            <% end %>
           </div>
 
           <!-- DataTales Example -->
@@ -69,6 +71,7 @@
                             </span>
                             <span class="text">Status</span>
                           <% end %>
+                          <% if current_admin.superadmin_role? %>
                           <%= link_to user_profil_path(u.id), class: "btn-profil btn btn-sm btn-primary btn-icon-split" do %>
                             <span class="icon text-white-50">
                               <i class="fas fa-pen"></i>
@@ -80,6 +83,7 @@
                               <i class="fas fa-trash"></i>
                             </span>
                             <span class="text">Supprimer</span>
+                          <% end %>
                           <% end %>
       
                         </td>
@@ -103,6 +107,7 @@
   </div>
 </div>
 
+<% if current_admin.superadmin_role? %>
 <!-- Add user Modal-->
 <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -153,6 +158,7 @@
     </div>
   </div>
 </div>
+<% end %>
 
 <%= render 'shared/javascript' %>
 <%= render 'shared/datatable_source_script' %>
