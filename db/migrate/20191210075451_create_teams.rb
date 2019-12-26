@@ -5,5 +5,9 @@ class CreateTeams < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+
+    Team.create do |t|
+      t.name = "Aucun"
+    end
   end
 end

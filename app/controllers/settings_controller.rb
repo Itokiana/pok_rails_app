@@ -1,4 +1,5 @@
 class SettingsController < ApplicationController
+  skip_before_action :authenticate_admin!, only: [:timecheck]
   def index
     if current_admin.superadmin_role?
       @teams = Team.all

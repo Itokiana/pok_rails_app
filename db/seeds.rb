@@ -22,7 +22,11 @@
 
 require 'jwt'
 
-t = JWT.decode("eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozfQ.a83ww_SSRXwzf3RQj4ZPhlEBk01KJ3wjjr8bztP-ZB0", "glopopopy", true, algorithm: 'HS256')
+# t = JWT.decode("eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJsYXN0X2xvZ2luIjoiMjAxOS0xMi0yNiAwNzo0NTo0MiBVVEMifQ.o2NRuQSQ6hQWkjiHtGXQO5ZEWJwaWgkGrHVYmyY2KFg", "glopopopy", true, algorithm: 'HS256')
 
-p t
+# p t
 
+o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
+string = (0...30).map { o[rand(o.length)] }.join
+
+p string

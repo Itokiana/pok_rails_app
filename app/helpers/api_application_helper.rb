@@ -8,7 +8,12 @@ module ApiApplicationHelper
     decoded_hash = decoded_token
     if !decoded_hash.empty?
       user_id = decoded_hash[0]['user_id']
-      @user = User.find_by(id: user_id)
+      token = decoded_hash[0]['token']
+      @user = User.find_by(id: user_id, token: token)
+      p "##############################"
+      p token
+      p "##############################"
+      @user
     else
       nil
     end
