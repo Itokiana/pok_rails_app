@@ -4,6 +4,8 @@ class TimeCheckController < ApplicationController
   end
 
   def create
+    p "#############################################"
+    p params
     time = TimeCheck.last
     time.application = params[:time_check][:application].to_i * 1000
     time.inactivity = params[:time_check][:inactivity].to_i * 1000
