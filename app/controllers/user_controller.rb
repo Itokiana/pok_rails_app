@@ -80,7 +80,7 @@ class UserController < ApplicationController
   end
 
   def destroy
-    user = RailsJwtAuth.model.find(params[:id])
+    user = User.find(params[:id])
     user.horodator_schedules.each do |hs|
       hs.windows.each do |w|
         w.delete

@@ -27,9 +27,9 @@ function addRow (id, email, password, alertBox, alertBoxSuccess) {
   let span2 = document.createElement('SPAN')
   let span3 = document.createElement('SPAN')
 
-  td1.innerHTML = id
-  td2.innerHTML = email
-  td3.innerHTML = password
+  td1.innerHTML = email
+  td2.innerHTML = ''
+  td3.innerHTML = 'Aucun'
 
   a1.className = "btn btn-sm btn-info btn-icon-split mr-1"
   a2.className = "btn btn-sm btn-primary btn-icon-split mr-1"
@@ -57,15 +57,18 @@ function addRow (id, email, password, alertBox, alertBoxSuccess) {
 
   a1.append(spanI1)
   a1.append(span1)
-  a1.setAttribute("href", "#")
+  a1.setAttribute("href", "/user_state/" + id)
   
   a2.append(spanI2)
   a2.append(span2)
-  a2.setAttribute("href", "#")
+  a2.setAttribute("href", "/user_state/profil/" + id)
   
   a3.append(spanI3)
   a3.append(span3)
-  a3.setAttribute("href", "/manage_users")
+  a3.setAttribute("href", "/dashboard/destroy_user/" + id)
+  a3.setAttribute("data-confirm", "Êtes-vous sûre de vouloir supprimer ?")
+  a3.setAttribute("data-method", "delete")
+  a3.setAttribute("rel", "nofollow")
 
 
   td4.append(a1)
@@ -98,17 +101,15 @@ if(typeof emailNewUser === 'undefined'  &&  typeof passwordNewUser === 'undefine
     if(validateEmail(emailNewUser.value)) {
 
       $.ajax({
-        url: '<%= request.base_url %>/api/registration',
+        url: '<%= request.base_url %>/users',
         type: 'POST',
         data: {
-          user: {
-            email: emailNewUser.value,
-            password: passwordNewUser.value
-          }
+          email: emailNewUser.value,
+          password: passwordNewUser.value
         },
         success: (res) => {
           console.log(res)
-          addRow(res.user.id, res.user.email, res.user.password_digest, alertAddUser, alertAddUserSuccess)
+          addRow(res.id, res.email, '', alertAddUser, alertAddUserSuccess)
         },
         error: () => {
           // 

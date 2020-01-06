@@ -14,7 +14,7 @@ class UsersController < ApiApplicationController
     if user.save!
       payload = {user_id: user.id, token: user.token}
       token = encode_token(payload)
-      render json: { email: user.email, jwt: token }
+      render json: { id: user.id, email: user.email, jwt: token }
     else
       render json: { errors: user.errors.full_messages }, status: :not_acceptable
     end
