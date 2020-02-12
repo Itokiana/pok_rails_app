@@ -20,5 +20,22 @@ class UsersController < ApiApplicationController
     end
   end
 
+  def update
+    p "######################################"
+    p params[:user][:id]
+    p "######################################"
+    user =  User.find(params[:user][:id])
+    user.password = params[:user][:password]
+    if user.save!
+      respond_to do |f|
+        # f.html
+        f.js
+      end
+      # render json: { message: "Saved with success" }
+    else
+      render json: { message: "Failed to save" }
+    end
+  end
+
 
 end

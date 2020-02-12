@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       registrations: 'admins/registrations'
   }
 
-  resource :users, only: [:create]   
+  resource :users, only: [:create, :update]   
 
   post "api/login", action: :login, controller: 'api/auth'   
   get "api/auto_login", action: :auto_login, controller: 'api/auth' 
